@@ -1,0 +1,23 @@
+{
+  "name": "steamverde",
+  "version": "1.0.0",
+  "description": "El Steam del pueblo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TurboFlame/SteamVerde.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TurboFlame/SteamVerde/issues"
+  },
+  "homepage": "https://github.com/TurboFlame/SteamVerde#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
