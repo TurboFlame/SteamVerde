@@ -1,13 +1,9 @@
-const { PrismaCLient } = require('@prisma/client')
+const {PrismaClient} = require('@prisma/client')
 const express = require('express')
 const app = express()
 const port = 3000
 
-const prisma = new PrismaCLient()
-
-app.get('/favicon.ico', (req, res) => {
-    res.status(204).send();
-});
+const prisma = new PrismaClient()
 
 app.use(express.json())
 

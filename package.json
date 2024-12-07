@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/TurboFlame/SteamVerde#readme",
   "dependencies": {
+    "@prisma/client": "^6.0.1",
     "express": "^4.21.2"
   },
   "devDependencies": {
