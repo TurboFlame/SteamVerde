@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Juego {
+  id                     Int      @id @default(autoincrement())
+  fecha                  DateTime
+  tipo                   String
+  nombre                 String
+  precio                 Int
+  empresa_desarrolladora String
+  requisitos_minimosGama String
+  rating                 Float?
+
+  Juegos_comprados     Juegos_comprados[]
+  Juego_desarrolladora Juego_desarrolladora[]
+}
+
+model Usuario {
+  id             Int      @id @default(autoincrement())
+  nombre         String
+  tipo_consola   String
+  juego_favorito String
+  lista_deseados String[]
+  carrito        String[]
+  dinero         Float
+
+  Juegos_comprados Juegos_comprados[]
+}
+
+model Desarrolladora {
+  id                     Int    @id @default(autoincrement())
+  nombre                 String
+  cant_juegos_publicados Int
+  ubicacion              String
+  ultimo_juego_publicado String
+  rating                 Float?
+
+  Juego_desarrolladora Juego_desarrolladora[]
+}
+
+model Juegos_comprados {
+  id         Int     @id @default(autoincrement())
+  usuario    Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int
+  juego      Juego   @relation(fields: [id_juego], references: [id])
+  id_juego   Int
+}
+
+model Juego_desarrolladora {
+  id                Int            @id @default(autoincrement())
+  desarrolladora    Desarrolladora @relation(fields: [id_desarrolladora], references: [id])
+  id_desarrolladora Int
+  juego             Juego          @relation(fields: [id_juego], references: [id])
+  id_juego          Int
+}

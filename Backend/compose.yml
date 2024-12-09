@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:17
+    container_name: database
+    environment:
+      - POSTGRES_USER=steamverde_corporation
+      - POSTGRES_PASSWORD=alvaro_donde_estas
+      - POSTGRES_DB=steamverde_db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./psql_data:/var/lib/postgresql/data
+    
