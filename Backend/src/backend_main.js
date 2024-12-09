@@ -2,10 +2,11 @@ const {PrismaClient} = require('@prisma/client')
 const express = require('express')
 const app = express()
 const port = 3000
-
+var cors = require('cors')
 const prisma = new PrismaClient()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.send('SteamVerde')
