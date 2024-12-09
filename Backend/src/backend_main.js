@@ -108,3 +108,89 @@ app.post('/api/v1/usuarios', async (req, res) =>{
 
     res.status(201).send(usuario)
 })
+
+app.put('/api/v1/usuarios/:id', async (req, res) =>{
+    let usuario = await prisma.usuario.findUnique({
+        where: {
+            id: parseInt(req.params.id) 
+        }
+    })
+    
+    if(usuario === null){
+        res.sendStatus(404)
+        return
+    }
+
+    usuario = await prisma.usuario.update({
+        where: {
+            id: usuario.id
+        }, 
+        data: {
+            nombre: req.body.nombre,
+            tipo_consola: req.body.tipo_consola,
+            juego_favorito: req.body.juego_favorito,
+            dinero: req.body.dinero
+        }
+    })
+
+    res.status(200).send(usuario)
+})
+
+app.put('/api/v1/juegos/:id', async (req, res) =>{
+    let juego = await prisma.juego.findUnique({
+        where: {
+            id: parseInt(req.params.id) 
+        }
+    })
+    
+    if(juego === null){
+        res.sendStatus(404)
+        return
+    }
+
+    juego = await prisma.juego.update({
+        where: {
+            id: juego.id
+        }, 
+        data: {
+            nombre: req.body.nombre,
+            fecha: req.body.fecha,
+            tipo: req.body.tipo,
+            precio: req.body.precio,
+            empresa_desarrolladora: req.body.empresa_desarrolladora,
+            requisitos_minimosGama: req.body.requisitos_minimosGama,
+            rating: req.body.rating,
+
+        }
+    })
+
+    res.status(200).send(juego)
+})
+
+app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
+    let desarrolladora = await prisma.desarrolladora.findUnique({
+        where: {
+            id: parseInt(req.params.id) 
+        }
+    })
+    
+    if(desarrolladora === null){
+        res.sendStatus(404)
+        return
+    }
+
+    desarrolladora = await prisma.desarrolladora.update({
+        where: {
+            id: desarrolladora.id
+        }, 
+        data: {
+            nombre: req.body.nombre,
+            cant_juegos_publicados: req.body.cant_juegos_publicados,
+            ubicacion: req.body.ubicacion,
+            ultimo_juego_publicado: req.body.ultimo_juego_publicado,
+            rating: req.body.rating
+        }
+    })
+
+    res.status(200).send(desarrolladora)
+})
