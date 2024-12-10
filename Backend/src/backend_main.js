@@ -134,6 +134,19 @@ app.put('/api/v1/usuarios/:id', async (req, res) =>{
         return
     }
 
+    const nombre_utilizado = await prisma.usuario.findFirst({
+        where: {
+            nombre: req.body.nombre,
+            NOT: {
+                id: usuario.id
+            }
+        }
+    });
+
+    if (nombre_utilizado){
+        return res.status(409).send('El nombre ya está en uso');
+    }
+
     usuario = await prisma.usuario.update({
         where: {
             id: usuario.id
@@ -142,6 +155,8 @@ app.put('/api/v1/usuarios/:id', async (req, res) =>{
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
             juego_favorito: req.body.juego_favorito,
+            lista_deseados: req.body.lista_deseados ?? undefined,
+            carrito: req.body.carrito ?? undefined,
             dinero: req.body.dinero
         }
     })
@@ -159,6 +174,19 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
     if(juego === null){
         res.sendStatus(404)
         return
+    }
+
+    const nombre_utilizado = await prisma.juego.findFirst({
+        where: {
+            nombre: req.body.nombre,
+            NOT: {
+                id: usuario.id
+            }
+        }
+    });
+
+    if (nombre_utilizado){
+        return res.status(409).send('El nombre ya está en uso');
     }
 
     juego = await prisma.juego.update({
@@ -190,6 +218,19 @@ app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
     if(desarrolladora === null){
         res.sendStatus(404)
         return
+    }
+
+    const nombre_utilizado = await prisma.desarrolladora.findFirst({
+        where: {
+            nombre: req.body.nombre,
+            NOT: {
+                id: usuario.id
+            }
+        }
+    });
+
+    if (nombre_utilizado){
+        return res.status(409).send('El nombre ya está en uso');
     }
 
     desarrolladora = await prisma.desarrolladora.update({
