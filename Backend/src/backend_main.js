@@ -95,13 +95,39 @@ app.get('/api/v1/desarrolladoras/:id', async (req, res) =>{
 })
 
 app.post('/api/v1/usuarios', async (req, res) =>{
-    const usuario = await prisma.usuario.create({
+
+    // const usuario = await prisma.usuario.create({
+    //     data: {
+    //         nombre: req.body.nombre,
+    //         tipo_consola: req.body.tipo_consola,
+    //         juego_favorito: req.body.juego_favorito,
+    //         lista_deseados: req.body.lista_deseados,
+    //         carrito: req.body.carrito,
+    //         dinero: parseFloat(req.body.dinero) ?? 0
+    //     }
+    // })
+    
+    // res.status(201).send(usuario)
+       
+
+    let usuario = await prisma.usuario.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (usuario != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    usuario = await prisma.usuario.create({
         data: {
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
             juego_favorito: req.body.juego_favorito,
-            lista_deseados: undefined,
-            carrito: undefined,
+            lista_deseados: req.body.lista_deseados,
+            carrito: req.body.carrito,
             dinero: parseFloat(req.body.dinero) ?? 0
         }
     })
