@@ -122,7 +122,67 @@ app.post('/api/v1/usuarios', async (req, res) =>{
     res.status(201).send(usuario)
 })
 
+app.post('/api/v1/juegos', async (req, res) =>{
+       
+
+    let juego = await prisma.juego.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (juego != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    juego = await prisma.juego.create({
+        data: {
+            nombre: req.body.nombre,
+            fecha: req.body.fecha,
+            tipo: req.body.tipo,
+            precio: parseInt(req.body.precio),
+            empresa_desarrolladora: req.body.empresa_desarrolladora,
+            requisitos_minimosGama: req.body.requisitos_minimosGama,
+            rating: parseFloat(req.body.rating)
+        }
+    })
+
+    res.status(201).send(juego)
+})
+
+app.post('/api/v1/desarrolladoras', async (req, res) =>{
+       
+
+    let desarrolladora = await prisma.desarrolladora.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (desarrolladora != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    desarrolladora = await prisma.desarrolladora.create({
+        data: {
+            nombre: req.body.nombre,
+            cant_juegos_publicados: parseInt(req.body.cant_juegos_publicados),
+            ubicacion: req.body.ubicacion,
+            ultimo_juego_publicado: req.body.ultimo_juego_publicado,
+            rating: parseFloat(req.body.rating) 
+        }
+    })
+
+    res.status(201).send(desarrolladora)
+})
+
 app.put('/api/v1/usuarios/:id', async (req, res) =>{
+    if(!req.body.nombre){
+        return res.send.status(400).send('El campo nombre no puede estar vacio.')
+    }
+    
     let usuario = await prisma.usuario.findUnique({
         where: {
             id: parseInt(req.params.id) 
@@ -165,6 +225,10 @@ app.put('/api/v1/usuarios/:id', async (req, res) =>{
 })
 
 app.put('/api/v1/juegos/:id', async (req, res) =>{
+    if(!req.body.nombre){
+        return res.send.status(400).send('El campo nombre no puede estar vacio.')
+    }
+
     let juego = await prisma.juego.findUnique({
         where: {
             id: parseInt(req.params.id) 
@@ -209,6 +273,10 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
 })
 
 app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
+    if(!req.body.nombre){
+        return res.send.status(400).send('El campo nombre no puede estar vacio.')
+    }
+    
     let desarrolladora = await prisma.desarrolladora.findUnique({
         where: {
             id: parseInt(req.params.id) 
@@ -248,63 +316,3 @@ app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
 
     res.status(200).send(desarrolladora)
 })
-
-
-app.post('/api/v1/juegos', async (req, res) =>{
-       
-
-    let juego = await prisma.juego.findFirst({
-        where: {
-            nombre: req.body.nombre
-        }
-    })
-
-    if (juego != null){
-        res.status(409).send("Ya existe el nombre, cambialo."); 
-        return
-    }
-    
-    juego = await prisma.juego.create({
-        data: {
-            nombre: req.body.nombre,
-            fecha: req.body.fecha,
-            tipo: req.body.tipo,
-            precio: parseInt(req.body.precio),
-            empresa_desarrolladora: req.body.empresa_desarrolladora,
-            requisitos_minimosGama: req.body.requisitos_minimosGama,
-            rating: parseFloat(req.body.rating)
-        }
-    })
-
-    res.status(201).send(juego)
-})
-
-
-app.post('/api/v1/desarrolladoras', async (req, res) =>{
-       
-
-    let desarrolladora = await prisma.desarrolladora.findFirst({
-        where: {
-            nombre: req.body.nombre
-        }
-    })
-
-    if (desarrolladora != null){
-        res.status(409).send("Ya existe el nombre, cambialo."); 
-        return
-    }
-    
-    desarrolladora = await prisma.desarrolladora.create({
-        data: {
-            nombre: req.body.nombre,
-            cant_juegos_publicados: parseInt(req.body.cant_juegos_publicados),
-            ubicacion: req.body.ubicacion,
-            ultimo_juego_publicado: req.body.ultimo_juego_publicado,
-            rating: parseFloat(req.body.rating) 
-        }
-    })
-
-    res.status(201).send(desarrolladora)
-})
-
-
