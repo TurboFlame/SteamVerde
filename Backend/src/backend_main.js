@@ -95,16 +95,89 @@ app.get('/api/v1/desarrolladoras/:id', async (req, res) =>{
 })
 
 app.post('/api/v1/usuarios', async (req, res) =>{
-    const usuario = await prisma.usuario.create({
+       
+
+    let usuario = await prisma.usuario.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (usuario != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    usuario = await prisma.usuario.create({
         data: {
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
             juego_favorito: req.body.juego_favorito,
-            lista_deseados: undefined,
-            carrito: undefined,
+            lista_deseados: req.body.lista_deseados,
+            carrito: req.body.carrito,
             dinero: parseFloat(req.body.dinero) ?? 0
         }
     })
 
     res.status(201).send(usuario)
 })
+
+
+app.post('/api/v1/juegos', async (req, res) =>{
+       
+
+    let juego = await prisma.juego.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (juego != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    juego = await prisma.juego.create({
+        data: {
+            nombre: req.body.nombre,
+            fecha: req.body.fecha,
+            tipo: req.body.tipo,
+            precio: parseInt(req.body.precio),
+            empresa_desarrolladora: req.body.empresa_desarrolladora,
+            requisitos_minimosGama: req.body.requisitos_minimosGama,
+            rating: parseFloat(req.body.rating)
+        }
+    })
+
+    res.status(201).send(juego)
+})
+
+
+app.post('/api/v1/desarrolladoras', async (req, res) =>{
+       
+
+    let desarrolladora = await prisma.desarrolladora.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (desarrolladora != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    desarrolladora = await prisma.desarrolladora.create({
+        data: {
+            nombre: req.body.nombre,
+            cant_juegos_publicados: parseInt(req.body.cant_juegos_publicados),
+            ubicacion: req.body.ubicacion,
+            ultimo_juego_publicado: req.body.ultimo_juego_publicado,
+            rating: parseFloat(req.body.rating) 
+        }
+    })
+
+    res.status(201).send(desarrolladora)
+})
+
+
