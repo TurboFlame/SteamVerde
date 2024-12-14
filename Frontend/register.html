@@ -91,9 +91,9 @@
 
     <div class="field">
         <div class="control">
-            <label class="checkbox">
+            <label class="checkbox" id="check-terminos" >
                 <input type="checkbox">
-                I agree to the <a href="#">terms and conditions</a>
+                I agree to the <a href="#" id="boton-terminos">terms and conditions</a>
             </label>
         </div>
     </div>
@@ -101,11 +101,39 @@
 
     <div class="field is-grouped">
         <div class="control">
-            <button class="button is-link">Registrarse</button>
+            <button class="button is-link is-disabled" id="boton-registro" disabled>Registrarse</button>
         </div>
     </div>
 </div>
 </div>
+<div class="modal" id="modal-terminos">
+    <div class="modal-background" id="modal-fondo-terminos"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Terminos Y Condiciones:</p>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+            By using this card, you agree to abide by these terms and any applicable laws.
+            The card is non-transferable and may only be used by the authorized holder.
+            The cardholder is responsible for keeping the card secure and reporting any loss or theft immediately.
+            The issuer reserves the right to modify or cancel the card, subject to notice.
+            Unauthorized transactions may result in the suspension of card privileges.
+            The card cannot be used for illegal activities or prohibited transactions.
+            Any disputes will be resolved in accordance with the issuer’s dispute resolution policy.
+            The cardholder agrees to provide accurate information and notify the issuer of any changes.
+            The cardholder is responsible for any fees associated with the card usage.
+            These terms are subject to change, and it is the cardholder’s responsibility to stay informed.
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <div class="buttons">
+                <button class="button is-success" id="modal-cerrar-boton">Cerrar</button>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="register.js"></script>
 </body>
 <script>
     fetch('localhost:3000/api/v1')
