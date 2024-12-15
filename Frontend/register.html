@@ -46,36 +46,8 @@
         </div>
     </nav>
 </div>
+
 <div class="container is-centered pt-6">
-<div class="field">
-    <div class="field">
-        <label class="label">Nombre de usuario</label>
-        <div class="control has-icons-left has-icons-right">
-            <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-            <span class="icon is-small is-left">
-      <i class="fas fa-user"></i>
-    </span>
-            <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-        </div>
-        <p class="help is-success">This username is available</p>
-    </div>
-
-    <div class="field">
-        <label class="label">Email</label>
-        <div class="control has-icons-left has-icons-right">
-            <input class="input" id="input-email" type="email" placeholder="Email input" value="hello@">
-            <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-            <span class="icon is-small is-right">
-      <i class="fas fa-exclamation-triangle"></i>
-    </span>
-        </div>
-        <p class="help is-hidden" id="mensaje-validacion-email">This email is invalid</p>
-    </div>
-
     <div class="field">
         <label class="label">Tipo de registro</label>
         <div class="control">
@@ -87,23 +59,65 @@
             </div>
         </div>
     </div>
-
-
     <div class="field">
-        <div class="control">
-            <label class="checkbox" >
-                <input type="checkbox" id="check-terminos">
-                I agree to the <a href="#" id="boton-terminos">terms and conditions</a>
-            </label>
+        <div class="field">
+            <label class="label">Nombre de usuario</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input is-success" type="text" placeholder="Ingrese su nombre de usuario" value="bulma">
+                <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+                <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+            </div>
+            <p class="help is-success">This username is available</p>
         </div>
-    </div>
+
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" id="input-email" type="email" placeholder="Ingrese su email" value="hello@">
+                <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+                <span class="icon is-small is-right">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+            </div>
+            <p class="help is-hidden" id="mensaje-validacion-email">This email is invalid</p>
+        </div>
+        <div class="field">
+            <label class="label">Contraseña</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" id="input-contra" type="password"  placeholder="Ingrese su contraseña">
+                <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+                <span class="icon is-small is-right">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+            </div>
+            <p class="help is-hidden" id="mensaje-validacion-contra"></p>
+        </div>
 
 
-    <div class="field is-grouped">
-        <div class="control">
-            <button class="button is-link is-disabled" id="boton-registro" disabled>Registrarse</button>
+
+        <div class="field">
+            <div class="control">
+                <label class="checkbox" >
+                    <input type="checkbox" id="check-terminos">
+                    I agree to the <a href="#" id="boton-terminos">terms and conditions</a>
+                </label>
+            </div>
         </div>
-    </div>
+
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link is-disabled" id="boton-registro" disabled>Registrarse</button>
+            </div>
+        </div>
 </div>
 </div>
 <div class="modal" id="modal-terminos">

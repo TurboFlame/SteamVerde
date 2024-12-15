@@ -49,7 +49,34 @@ inputEmail.addEventListener("input",()=>{
     }
 })
 
+const inputContra=document.getElementById("input-contra");
+const msgValidacionContra=document.getElementById("mensaje-validacion-contra");
+
+inputContra.addEventListener("input",()=>{
+    msgValidacionContra.classList.remove("is-hidden")
+    if (contrasenaEsValida(inputContra.value)){
+        msgValidacionContra.classList.remove("is-danger")
+        msgValidacionContra.classList.add("is-success")
+        inputContra.classList.remove("is-danger")
+        inputContra.classList.add("is-success")
+        msgValidacionContra.textContent="Contraseña valida"
+    }else{
+        msgValidacionContra.classList.remove("is-success")
+        msgValidacionContra.classList.add("is-danger")
+        inputContra.classList.remove("is-success")
+        inputContra.classList.add("is-danger")
+        msgValidacionContra.textContent="Contraseña invalida"
+    }
+})
+
+
+
+
 function emailEsValido(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+}
+function contrasenaEsValida(contrasena){
+    const contrasenaRegex=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return contrasenaRegex.test(contrasena)
 }
