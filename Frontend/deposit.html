@@ -66,17 +66,33 @@
         </div>
     </nav>
 </div>
-<div class="container is-centered has-background-primary" id="deposit-container">
+<div class="container is-centered has-background-success" id="deposit-container">
+
     <div class="field" id="input-num-tarjeta">
+        <label class="label mt-2" >Numero de tarjeta</label>
         <div class="control is-expanded mt-1 mb-1">
             <input class="input has-text-centered"  type="text" placeholder="XXXX-XXXX-XXXX" />
         </div>
         <div class="field is-grouped mt-1 mb-1">
             <div class="control">
+                <label class="label" >Fecha de vencimiento</label>
                 <input class="input has-text-centered" id="input-codigo" type="text" placeholder="MM/YY" />
             </div>
             <div class="control">
+                <label class="label " >Codigo de seguridad</label>
                 <input class="input has-text-centered" id="input-fecha" type="text" placeholder="XXX" />
+            </div>
+        </div>
+        <div class="field is-grouped mt-4 mb-4">
+            <label class="label">Monto a ingresar:</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input has-text-centered" type="text" placeholder="Monto" />
+                <span class="icon is-static has-text-success is-left">
+            $
+        </span>
+                <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+        </span>
             </div>
         </div>
     </div>
