@@ -38,8 +38,8 @@
                     <div class="buttons">
 
 
-                        <a class="button is-light">
-                            Ingresar
+                        <a class="button is-light" href="login.html">
+                            Registrarse
                         </a>
                     </div>
                 </div>
@@ -49,10 +49,21 @@
 </div>
 <div class="container is-centered pt-6">
     <div class="field">
+        <label class="label">Tipo de ingreso</label>
+        <div class="control">
+            <div class="select">
+                <select>
+                    <option>Usuario</option>
+                    <option>Empresa</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="field">
         <div class="field">
             <label class="label">Nombre de usuario</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input is-success" type="text" placeholder="Text input" value="bulma">
+                <input class="input is-success" type="text" placeholder="Ingrese su usuario">
                 <span class="icon is-small is-left">
       <i class="fas fa-user"></i>
     </span>
@@ -64,9 +75,9 @@
         </div>
 
         <div class="field">
-            <label class="label">Email</label>
+            <label class="label">Contraseña</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
+                <input class="input is-danger" type="email" placeholder="Ingrese su contraseña" >
                 <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
@@ -77,20 +88,10 @@
             <p class="help is-danger">This email is invalid</p>
         </div>
 
-        <div class="field">
-            <label class="label">Tipo de ingreso</label>
-            <div class="control">
-                <div class="select">
-                    <select>
-                        <option>Usuario</option>
-                        <option>Empresa</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-link is-disabled" id="boton-registro" disabled>Ingresar</button>
+                <button class="button is-link is-disabled" id="boton-ingreso" disabled>Ingresar</button>
             </div>
         </div>
     </div>
@@ -102,5 +103,7 @@
         .then(json => {
             console.log(json);
         });
+
+
 </script>
 </html>
