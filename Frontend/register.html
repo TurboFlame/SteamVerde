@@ -37,7 +37,7 @@
                     <div class="buttons">
 
 
-                        <a class="button is-light">
+                        <a class="button is-light" href="login.html">
                             Ingresar
                         </a>
                     </div>
@@ -91,8 +91,8 @@
 
     <div class="field">
         <div class="control">
-            <label class="checkbox" id="check-terminos" >
-                <input type="checkbox">
+            <label class="checkbox" >
+                <input type="checkbox" id="check-terminos">
                 I agree to the <a href="#" id="boton-terminos">terms and conditions</a>
             </label>
         </div>
@@ -133,8 +133,10 @@
         </footer>
     </div>
 </div>
-<script src="register.js"></script>
+
+
 </body>
+<script src="register.js"></script>
 <script>
     fetch('localhost:3000/api/v1')
         .then(response => response.json())
