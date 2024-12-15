@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SteamVerde</title>
+    <link rel="stylesheet" href="deposit.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Team SteamVerde">
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    >
+</head>
+<body>
+<div class="container is-widescreen">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                <img src="steamVerde.jpg" alt="SteamVerde Logo">
+            </a>
+            <a rolrolee="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Tienda
+                </a>
+
+                <a class="navbar-item">
+                    Biblioteca
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Perfil
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Amigos
+                        </a>
+                        <a class="navbar-item is-selected">
+                            Ingresar dinero
+                        </a>
+                        <a class="navbar-item">
+                            Contact
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Report an issue
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+
+
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container is-centered has-background-primary" id="deposit-container">
+    <div class="field" id="input-num-tarjeta">
+        <div class="control is-expanded mt-1 mb-1">
+            <input class="input has-text-centered"  type="text" placeholder="XXXX-XXXX-XXXX" />
+        </div>
+        <div class="field is-grouped mt-1 mb-1">
+            <div class="control">
+                <input class="input has-text-centered" id="input-codigo" type="text" placeholder="MM/YY" />
+            </div>
+            <div class="control">
+                <input class="input has-text-centered" id="input-fecha" type="text" placeholder="XXX" />
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    fetch('localhost:3000/api/v1')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        });
+</script>
+</html>

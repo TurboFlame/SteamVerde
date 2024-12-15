@@ -1,0 +1,28 @@
+
+
+#input-num-tarjeta{
+    width: 80%;
+}
+#input-codigo{
+    width:87%
+}
+#input-fecha{
+    width: 87%
+
+}
+#deposit-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin-top:200px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    #deposit-container {
+        width: 80%;
+        margin-top: 50px;
+    }
+}
