@@ -58,7 +58,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="navbar-search">
+                    <div class="control has-icons-left has-icons-right is-expanded mt-2" >
+                        <input class="input has-text-centered" type="text" placeholder="Buscar juego" />
+                        <span class="icon is-static has-text-success is-left">
+                🔎
+            </span>
+                    </div>
+                </div>
 
+                <div class="navbar-end"></div>
                 <div class="navbar-end">
 
                     <div class="navbar-item">
@@ -83,20 +92,16 @@
             </div>
         </section>
     <class h1 class="subtitle">Agregar carrusel aca</class>
-    <footer class="footer" id="footer">
-        <div class="content has-text-centered">
-            <div class="columns container">
+    <footer class="footer p-6" id="footer">
+        <div class="content has-text-centered is-fluid">
+            <div class="columns container is-fluid">
                 <div class="column con">Desarrollado por Agus, Fran y Gilberto</div>
-                <div class="column">Second column</div>
-                <div class="column">Third column</div>
+                <div class="column is-fluid" >Second column</div>
+                <div class="column is-fluid">Third column</div>
             </div>
         </div>
     </footer>
-    <section class="section">
-        <div class="container">
-            <div class="columns is-multiline" id="card-grid"></div>
-        </div>
-    </section>
+
     </body>
     <script>
         fetch('localhost:3000/api/v1')
