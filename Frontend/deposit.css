@@ -9,6 +9,9 @@
 #input-fecha{
     width: 87%
 }
+#input-monto{
+    width:91%
+}
 .label {
     color: black !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  /* Bulma's default font */
