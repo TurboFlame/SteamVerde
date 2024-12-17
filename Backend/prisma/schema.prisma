@@ -12,9 +12,10 @@ model Juego {
   tipo                   String
   nombre                 String
   precio                 Int
-  empresa_desarrolladora String
-  requisitos_minimosGama String
+  empresa_desarrolladora String @default("SteamVerde&Co")
+  requisitos_minimosGama Int?
   rating                 Float?
+  imagen                 String @default("steamverde.png")
   Juego_desarrolladora   Juego_desarrolladora[]
   Juegos_comprados       Juegos_comprados[]
 }
@@ -23,9 +24,9 @@ model Usuario {
   id               Int                @id @default(autoincrement())
   nombre           String
   tipo_consola     String
-  juego_favorito   String
-  lista_deseados   String[]
-  carrito          String[]
+  contrasena       String @default("contrasena_base")
+  genero_favorito  String?
+  proxima_compra   String?
   dinero           Float
   Juegos_comprados Juegos_comprados[]
 }
