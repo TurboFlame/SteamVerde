@@ -311,3 +311,45 @@ app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
 
     res.status(200).send(desarrolladora)
 })
+
+app.delete('/api/v1/usuarios/:id', async (req, res) =>{
+    const usuario = await prisma.usuario.findUnique({
+        where:{
+            id : parseInt(req.params.id)
+        }
+    })
+
+    if(usuario == null){
+        res.sendStatus(404)
+        return 
+    }
+
+    await prisma.usuario.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    
+    res.status(200).send(usuario)
+})
+
+app.delete('/api/v1/desarrolladoras/:id', async (req, res) =>{
+    const desarrolladora = await prisma.desarrolladora.findUnique({
+        where:{
+            id : parseInt(req.params.id)
+        }
+    })
+
+    if(desarrolladora == null){
+        res.sendStatus(404)
+        return 
+    }
+
+    await prisma.desarrolladora.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    
+    res.status(200).send(desarrolladora)
+})
