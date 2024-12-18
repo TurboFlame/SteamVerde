@@ -5,8 +5,12 @@ requisitos:
 -Node
 -npm
 
-Descargar dependencias
--npm install @prisma/client, express, nodemon, prisma, cors (solo la primera vez)
+Descargar dependencias para arrancar el backend por primera vex (solo la primera vez)
+-npm install @prisma/client
+-npm install express 
+-npm install nodemon
+-npm install prisma
+-npm install cors 
 
 Arrancar backend
 -npm run dev
