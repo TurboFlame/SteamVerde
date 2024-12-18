@@ -114,9 +114,9 @@ app.post('/api/v1/usuarios', async (req, res) =>{
         data: {
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
-            juego_favorito: req.body.juego_favorito,
-            lista_deseados: req.body.lista_deseados,
-            carrito: req.body.carrito,
+            contrasena: req.body.contrasena,
+            genero_favorito: req.body.genero_favorito,
+            proxima_compra: req.body.proxima_compra,
             dinero: parseFloat(req.body.dinero) ?? 0
         }
     })
@@ -217,10 +217,10 @@ app.put('/api/v1/usuarios/:id', async (req, res) =>{
         data: {
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
-            juego_favorito: req.body.juego_favorito,
-            lista_deseados: req.body.lista_deseados ?? undefined,
-            carrito: req.body.carrito ?? undefined,
-            dinero: req.body.dinero
+            contrasena: req.body.contrasena,
+            genero_favorito: req.body.genero_favorito,
+            proxima_compra: req.body.proxima_compra,
+            dinero: parseFloat(req.body.dinero)
         }
     })
 
@@ -354,4 +354,25 @@ app.delete('/api/v1/desarrolladoras/:id', async (req, res) =>{
     })
     
     res.status(200).send(desarrolladora)
+})
+
+app.delete('/api/v1/juegos/:id', async (req, res) =>{
+    const juego = await prisma.juego.findUnique({
+        where:{
+            id : parseInt(req.params.id)
+        }
+    })
+
+    if(juego == null){
+        res.sendStatus(404)
+        return 
+    }
+
+    await prisma.juego.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    
+    res.status(200).send(juego)
 })
