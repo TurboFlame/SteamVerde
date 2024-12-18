@@ -95,13 +95,28 @@ app.get('/api/v1/desarrolladoras/:id', async (req, res) =>{
 })
 
 app.post('/api/v1/usuarios', async (req, res) =>{
-    const usuario = await prisma.usuario.create({
+    if(!req.body.nombre){
+        return res.status(400).send('El campo nombre no puede estar vacio.')
+    }       
+
+    let usuario = await prisma.usuario.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (usuario != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    usuario = await prisma.usuario.create({
         data: {
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
-            juego_favorito: req.body.juego_favorito,
-            lista_deseados: undefined,
-            carrito: undefined,
+            contrasena: req.body.contrasena,
+            genero_favorito: req.body.genero_favorito,
+            proxima_compra: req.body.proxima_compra,
             dinero: parseFloat(req.body.dinero) ?? 0
         }
     })
@@ -109,7 +124,67 @@ app.post('/api/v1/usuarios', async (req, res) =>{
     res.status(201).send(usuario)
 })
 
+app.post('/api/v1/juegos', async (req, res) =>{
+    if(!req.body.nombre){
+        return res.status(400).send('El campo nombre no puede estar vacio.')
+    }
+
+    let juego = await prisma.juego.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (juego != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    juego = await prisma.juego.create({
+        data: {
+            nombre: req.body.nombre,
+            tipo: req.body.tipo,
+            precio: parseInt(req.body.precio),
+            empresa_desarrolladora: req.body.empresa_desarrolladora,
+            requisitos_minimosGama: req.body.requisitos_minimosGama,
+            rating: parseFloat(req.body.rating)
+        }
+    })
+
+    res.status(201).send(juego)
+})
+
+app.post('/api/v1/desarrolladoras', async (req, res) =>{
+    if(!req.body.nombre){
+        return res.status(400).send('El campo nombre no puede estar vacio.')
+    }
+
+    let desarrolladora = await prisma.desarrolladora.findFirst({
+        where: {
+            nombre: req.body.nombre
+        }
+    })
+
+    if (desarrolladora != null){
+        res.status(409).send("Ya existe el nombre, cambialo."); 
+        return
+    }
+    
+    desarrolladora = await prisma.desarrolladora.create({
+        data: {
+            nombre: req.body.nombre,
+            cant_juegos_publicados: parseInt(req.body.cant_juegos_publicados),
+            ubicacion: req.body.ubicacion,
+            ultimo_juego_publicado: req.body.ultimo_juego_publicado,
+            rating: parseFloat(req.body.rating) 
+        }
+    })
+
+    res.status(201).send(desarrolladora)
+})
+
 app.put('/api/v1/usuarios/:id', async (req, res) =>{
+    
     let usuario = await prisma.usuario.findUnique({
         where: {
             id: parseInt(req.params.id) 
@@ -141,10 +216,10 @@ app.put('/api/v1/usuarios/:id', async (req, res) =>{
         data: {
             nombre: req.body.nombre,
             tipo_consola: req.body.tipo_consola,
-            juego_favorito: req.body.juego_favorito,
-            lista_deseados: req.body.lista_deseados ?? undefined,
-            carrito: req.body.carrito ?? undefined,
-            dinero: req.body.dinero
+            contrasena: req.body.contrasena,
+            genero_favorito: req.body.genero_favorito,
+            proxima_compra: req.body.proxima_compra,
+            dinero: parseFloat(req.body.dinero)
         }
     })
 
@@ -152,6 +227,7 @@ app.put('/api/v1/usuarios/:id', async (req, res) =>{
 })
 
 app.put('/api/v1/juegos/:id', async (req, res) =>{
+
     let juego = await prisma.juego.findUnique({
         where: {
             id: parseInt(req.params.id) 
@@ -167,7 +243,7 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
         where: {
             nombre: req.body.nombre,
             NOT: {
-                id: usuario.id
+                id: juego.id
             }
         }
     });
@@ -182,7 +258,6 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
         }, 
         data: {
             nombre: req.body.nombre,
-            fecha: req.body.fecha,
             tipo: req.body.tipo,
             precio: req.body.precio,
             empresa_desarrolladora: req.body.empresa_desarrolladora,
@@ -196,6 +271,7 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
 })
 
 app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
+
     let desarrolladora = await prisma.desarrolladora.findUnique({
         where: {
             id: parseInt(req.params.id) 
@@ -211,7 +287,7 @@ app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
         where: {
             nombre: req.body.nombre,
             NOT: {
-                id: usuario.id
+                id: desarrolladora.id
             }
         }
     });
@@ -234,4 +310,67 @@ app.put('/api/v1/desarrolladoras/:id', async (req, res) =>{
     })
 
     res.status(200).send(desarrolladora)
+})
+
+app.delete('/api/v1/usuarios/:id', async (req, res) =>{
+    const usuario = await prisma.usuario.findUnique({
+        where:{
+            id : parseInt(req.params.id)
+        }
+    })
+
+    if(usuario == null){
+        res.sendStatus(404)
+        return 
+    }
+
+    await prisma.usuario.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    
+    res.status(200).send(usuario)
+})
+
+app.delete('/api/v1/desarrolladoras/:id', async (req, res) =>{
+    const desarrolladora = await prisma.desarrolladora.findUnique({
+        where:{
+            id : parseInt(req.params.id)
+        }
+    })
+
+    if(desarrolladora == null){
+        res.sendStatus(404)
+        return 
+    }
+
+    await prisma.desarrolladora.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    
+    res.status(200).send(desarrolladora)
+})
+
+app.delete('/api/v1/juegos/:id', async (req, res) =>{
+    const juego = await prisma.juego.findUnique({
+        where:{
+            id : parseInt(req.params.id)
+        }
+    })
+
+    if(juego == null){
+        res.sendStatus(404)
+        return 
+    }
+
+    await prisma.juego.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    
+    res.status(200).send(juego)
 })
