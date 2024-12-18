@@ -412,3 +412,34 @@ app.delete('/api/v1/juegos/:id', async (req, res) =>{
     
     res.status(200).send(juego)
 })
+
+
+app.get('/api/v1/juegos_comprados/:id_usuario', async (req, res) => {
+  const  id_usuario  = req.params.id_usuario
+
+  try {
+    const juegos_comprados = await prisma.juegos_comprados.findMany({
+      where: {
+        id_usuario: parseInt(id_usuario), 
+      },
+      include: {
+        juego: true,
+      },
+    })
+
+    if(juegos_comprados == null){
+        res.sendStatus(404)
+        return
+    }
+    res.json(juegos_comprados)
+  } 
+  catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Error al obtener los juegos comprados' })
+  }
+})
+
+
+
+
+
