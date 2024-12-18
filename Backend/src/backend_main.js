@@ -49,6 +49,34 @@ app.get('/api/v1/desarrolladoras', async (req, res) =>{
     res.json(desarrolladoras)
 })
 
+app.get('/api/v1/usuarios/nombre', async (req, res) =>{
+    const nombre = req.query.nombre
+    const contrasena = req.query.contrasena
+
+    if(!nombre || !contrasena){
+        res.status(400).send("Faltan parametros.")
+        return
+    }
+
+    const usuario = await prisma.usuario.findFirst({
+        where: { 
+            nombre: nombre
+        }
+    });
+
+    if (!usuario) {
+        res.status(404).send('Usuario no encontrado');
+        return;
+    }
+
+    if (usuario.contrasena !== contrasena) {
+        res.status(401).send('Contraseña incorrecta');
+        return;
+    }
+
+    res.send(usuario);
+})
+
 app.get('/api/v1/usuarios/:id', async (req, res) =>{
     const usuario = await prisma.usuario.findUnique({
         where: {
