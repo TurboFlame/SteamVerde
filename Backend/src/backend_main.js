@@ -412,3 +412,61 @@ app.delete('/api/v1/juegos/:id', async (req, res) =>{
     
     res.status(200).send(juego)
 })
+
+app.get('/api/v1/juego_desarrolladora/:id_juego', async (req, res) => {
+    const id_juego = req.params.id_juego
+
+    try {
+        const juegoDesarrolladora = await prisma.juego_desarrolladora.findMany({
+            where: {
+                id_juego: id_juego
+            },
+            include: {
+                desarrolladora: true,
+                juego: true
+            }
+        });
+
+        if (!juegoDesarrolladora || juegoDesarrolladora.length === 0) {
+            res.status(404).json({ error: 'No se encontró información para el juego especificado.'})
+            return
+        }
+
+        res.json(juegoDesarrolladora)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Error al obtener la información del juego y su desarrolladora.'})
+    }
+
+})
+
+app.post('/api/v1/juego_desarrolladora/:id_desarrolladora&:id_juego', async (req, res) => {
+
+    const juego_existe = await prisma.juego_desarrolladora.findUnique({
+        where: {
+            id_desarrolladora: parseInt(req.params.id_desarrolladora),
+            id_juego: parseInt(req.params.id_juego),
+
+        },
+        })
+
+    if (juego_existe != null) {
+        res.status(409).send('El juego ya tiene desarrolladora')
+        return 
+    }
+
+    try {
+      const juego_desarrolladora = await prisma.juego_desarrolladora.create({
+        data: {
+          id_juego: parseInt(id_juego),
+          id_desarrolladora: parseInt(id_desarrolladora),
+        },
+      })
+
+      res.status(201).json(juego_desarrolladora)
+    } 
+    catch (error) {
+      console.error(error)
+      res.status(500).json({ error: 'Error al asignar desarrolladora' })
+    }
+})
