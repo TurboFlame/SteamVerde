@@ -146,8 +146,9 @@ app.post('/api/v1/juegos', async (req, res) =>{
             tipo: req.body.tipo,
             precio: parseInt(req.body.precio),
             empresa_desarrolladora: req.body.empresa_desarrolladora,
-            requisitos_minimosGama: req.body.requisitos_minimosGama,
-            rating: parseFloat(req.body.rating)
+            requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama),
+            rating: parseFloat(req.body.rating),
+            imagen: req.body.params
         }
     })
 
@@ -259,10 +260,11 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
         data: {
             nombre: req.body.nombre,
             tipo: req.body.tipo,
-            precio: req.body.precio,
+            precio: parseInt(req.body.precio),
             empresa_desarrolladora: req.body.empresa_desarrolladora,
-            requisitos_minimosGama: req.body.requisitos_minimosGama,
-            rating: req.body.rating,
+            requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama),
+            rating: parseFloat(req.body.rating),
+            imagen: req.body.imagen
 
         }
     })
