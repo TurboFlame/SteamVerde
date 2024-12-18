@@ -96,9 +96,11 @@ app.get('/api/v1/desarrolladoras/:id', async (req, res) =>{
 
 app.post('/api/v1/usuarios', async (req, res) =>{
     if(!req.body.nombre){
-        return res.status(400).send('El campo nombre no puede estar vacio.')
+        return res.status(400).send("El campo nombre no puede estar vacio.")
     }       
-
+    if(!req.body.contrasena){
+        return res.status(400).send("El campo contraseña no puede estar vacio.")
+    }
     let usuario = await prisma.usuario.findFirst({
         where: {
             nombre: req.body.nombre
@@ -126,7 +128,7 @@ app.post('/api/v1/usuarios', async (req, res) =>{
 
 app.post('/api/v1/juegos', async (req, res) =>{
     if(!req.body.nombre){
-        return res.status(400).send('El campo nombre no puede estar vacio.')
+        return res.status(400).send("El campo nombre no puede estar vacio.")
     }
 
     let juego = await prisma.juego.findFirst({
@@ -157,7 +159,7 @@ app.post('/api/v1/juegos', async (req, res) =>{
 
 app.post('/api/v1/desarrolladoras', async (req, res) =>{
     if(!req.body.nombre){
-        return res.status(400).send('El campo nombre no puede estar vacio.')
+        return res.status(400).send("El campo nombre no puede estar vacio.")
     }
 
     let desarrolladora = await prisma.desarrolladora.findFirst({
