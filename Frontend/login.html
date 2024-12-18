@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SteamVerde</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Team SteamVerde">
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    >
+</head>
+<body>
+<div class="container is-widescreen">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                <img src="steamVerde.jpg" alt="SteamVerde Logo">
+            </a>
+            <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Tienda
+                </a>
+            </div>
+            <div class="navbar-end">
+
+                <div class="navbar-item">
+                    <div class="buttons">
+
+
+                        <a class="button is-light" href="login.html">
+                            Registrarse
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container is-centered pt-6">
+    <div class="field">
+        <label class="label">Tipo de ingreso</label>
+        <div class="control">
+            <div class="select">
+                <select>
+                    <option>Usuario</option>
+                    <option>Empresa</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="field">
+            <label class="label">Nombre de usuario</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="Ingrese su usuario">
+                <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+                <span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+            </div>
+
+        </div>
+
+        <div class="field">
+            <label class="label">Contraseña</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="email" placeholder="Ingrese su contraseña" >
+                <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+                <span class="icon is-small is-right">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span>
+            </div>
+        </div>
+
+
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link is-disabled" id="boton-ingreso" disabled>Ingresar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    fetch('localhost:3000/api/v1')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        });
+
+
+</script>
+</html>
