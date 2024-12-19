@@ -24,8 +24,18 @@ async function ingresar() {
         return;
     }
     if (respuesta.status === 200) {
+        const usuario=await respuesta.json();
+        sessionStorage.setItem('usuario', JSON.stringify({
+            id: usuario.id,
+            nombre: usuario.nombre,
+            tipo_consola: usuario.tipo_consola,
+            genero_favorito: usuario.genero_favorito,
+            proxima_compra: usuario.proxima_compra,
+            dinero: usuario.dinero
+        }));
         mensajeIngresoValidacionValido()
-        return respuesta;
+        window.location.href = 'index.html';
+        
     }
 }
 
