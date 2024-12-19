@@ -53,7 +53,7 @@
                         <hr class="navbar-divider">
                         <a class="navbar-item">
                             Report an issue
-                        </a>
+                        </a>/api/v1/juegos
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                     <h3 class="subtitle is-5">Especificaciones:</h3>
                     <ul>
                         <li><label class="label"id="requisitos-producto">Requisitos:</label></li>
-                        <li><label class="label" id="empresa-producto">Empresa</label></li>
+                        <li><label class="label"/api/v1/juegos id="empresa-producto">Empresa</label></li>
 
                     </ul>
                 </div>
@@ -125,6 +125,7 @@
 <script>
 
     const parametrosURL=new URLSearchParams(window.location.search);
+    idProducto= parametrosURL.get("id");
     nombreProducto = parametrosURL.get("nombre");
     imagenProducto = parametrosURL.get("imagen");
     requisitosProducto = parametrosURL.get("requisitos");
@@ -152,16 +153,47 @@
     }
     const msgValidacionCompra=document.getElementById("mensaje-validacion-compra");
     const botonComprar=document.getElementById("boton-comprar");
+
+
     botonComprar.addEventListener("click", function(){
         event.preventDefault()
         const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-        if (usuario.dinero-parseFloat(precioProducto) >=0){
+        if (usuario.dinero-parseFloat(precioProducto) >=0 && agregar_juego_usuario(usuario.id,idProducto).ok){
             usuario.dinero-=parseFloat(precioProducto);
         }
         depositar(usuario.dinero,usuario.id)
-        location.reload()
+
         sessionStorage.setItem('usuario', JSON.stringify(usuario));
+
     })
+    async function agregar_juego_usuario(usuarioId, juegoId) {
+        const respuesta = await fetch(`http://localhost:3000/api/v1/juegos_comprados/${juegoId}/${usuarioId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                usuarioId: usuarioId,
+                juegoId: juegoId
+            })
+        });
+        if (respuesta.status == 409) {
+            botonComprar.textContent="Juego Comprado"
+        }
+        if (respuesta.status == 201) {
+            console.log("Juego comprado exitosamente");
+            botonComprar.textContent="Juego Comprado"
+        }
+        if (!respuesta.ok) {
+            console.log('Error: ' + respuesta.status);
+        }
+
+
+        return respuesta;
+    }
+
+
+
     async function depositar(dineroNuevo,idUsuario){
 
         const respuesta = fetch(`http://localhost:3000/api/v1/usuarios/${idUsuario}`, {
@@ -197,6 +229,13 @@
             dinero.classList.remove("is-hidden");
         }
     });
+
+
+
+
+
+
+
 </script>
 
 
