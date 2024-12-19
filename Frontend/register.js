@@ -67,7 +67,7 @@ inputContra.addEventListener("input",()=>{
         msgValidacionContra.classList.add("is-danger")
         inputContra.classList.remove("is-success")
         inputContra.classList.add("is-danger")
-        msgValidacionContra.textContent="Contraseña invalida"
+        msgValidacionContra.textContent="Contraseña invalida. Ingrese numeros, minusculas y mayusculas"
     }
 })
 
