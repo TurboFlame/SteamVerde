@@ -66,13 +66,13 @@ formAgregarJuego.addEventListener('submit', async function (event) {
     }
   
     const nuevoJuego = {
-      nombre,
-      tipo,
-      precio,
-      empresa_desarrolladora: empresaDesarrolladora || "SteamVerde&Co",
-      requisitos_minimosGama,
-      rating,
-      imagen,
+        nombre,
+        tipo,
+        precio,
+        empresa_desarrolladora: empresaDesarrolladora || "SteamVerde&Co",
+        requisitos_minimosGama,
+        rating,
+        imagen,
     };
   
     try {
@@ -89,7 +89,6 @@ formAgregarJuego.addEventListener('submit', async function (event) {
       } else if (!response.ok) {
         throw new Error("Error al agregar el juego.");
       } else {
-        const juegoAgregado = await response.json();
         
         alert("Juego agregado exitosamente."); 
         formAgregarJuego.reset(); 
