@@ -414,7 +414,7 @@ app.delete('/api/v1/juegos/:id', async (req, res) =>{
 })
 
 app.get('/api/v1/juego_desarrolladora/:id_juego', async (req, res) => {
-    const id_juego = req.params.id_juego
+    const id_juego = parseInt(req.params.id_juego)
 
     try {
         const juegoDesarrolladora = await prisma.juego_desarrolladora.findMany({
@@ -440,13 +440,14 @@ app.get('/api/v1/juego_desarrolladora/:id_juego', async (req, res) => {
 
 })
 
-app.post('/api/v1/juego_desarrolladora/:id_desarrolladora&:id_juego', async (req, res) => {
+app.post('/api/v1/juego_desarrolladora/:id_desarrolladora/:id_juego', async (req, res) => {
+    const id_juego = parseInt(req.params.id_juego)
+    const id_desarrolladora = parseInt(req.params.id_desarrolladora)
 
-    const juego_existe = await prisma.juego_desarrolladora.findUnique({
+    const juego_existe = await prisma.juego_desarrolladora.findFirst({
         where: {
-            id_desarrolladora: parseInt(req.params.id_desarrolladora),
-            id_juego: parseInt(req.params.id_juego),
-
+            id_desarrolladora: id_desarrolladora,
+            id_juego: id_juego
         },
         })
 
@@ -458,9 +459,9 @@ app.post('/api/v1/juego_desarrolladora/:id_desarrolladora&:id_juego', async (req
     try {
       const juego_desarrolladora = await prisma.juego_desarrolladora.create({
         data: {
-          id_juego: parseInt(id_juego),
-          id_desarrolladora: parseInt(id_desarrolladora),
-        },
+          id_juego: id_juego,
+          id_desarrolladora: id_desarrolladora
+        }
       })
 
       res.status(201).json(juego_desarrolladora)
