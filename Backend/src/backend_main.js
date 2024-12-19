@@ -431,10 +431,10 @@ app.get('/api/v1/juego_desarrolladora/:id_desarrolladora', async (req, res) => {
             return
         }
 
-        res.json(juegoDesarrolladora)
+        res.send(juegoDesarrolladora)
     } catch (error) {
         console.error(error)
-        res.status(500).json({ error: 'Error al obtener la información del juego y su desarrolladora.'})
+        res.status(500).send('Error al obtener la información del juego y su desarrolladora.')
     }
 })
 
@@ -462,10 +462,10 @@ app.post('/api/v1/juego_desarrolladora/:id_desarrolladora/:id_juego', async (req
         }
       })
 
-      res.status(201).json(juego_desarrolladora)
+      res.status(201).send(juego_desarrolladora)
     } 
     catch (error) {
       console.error(error)
-      res.status(500).json({ error: 'Error al asignar desarrolladora' })
+      res.status(500).send('Error al asignar desarrolladora')
     }
 })
