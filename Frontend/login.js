@@ -31,11 +31,11 @@ async function ingresar() {
             tipo_consola: usuario.tipo_consola,
             genero_favorito: usuario.genero_favorito,
             proxima_compra: usuario.proxima_compra,
-            dinero: usuario.dinero
+            dinero: parseFloat(usuario.dinero)
         }));
         mensajeIngresoValidacionValido()
         window.location.href = 'index.html';
-        
+
     }
 }
 
