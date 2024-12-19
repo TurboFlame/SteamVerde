@@ -89,7 +89,7 @@
             <div class='columns is-mobile is-centered'>
               <div class='column is-8'>
                 <div>
-                  <h1 class='title'>Informacion Usuarios</h1>
+                  <h1 class='title'>Información de Usuarios</h1>
                   <hr>
                 </div>
                 <table class='table is-bordered has-background'>
@@ -100,16 +100,67 @@
                         <th>Tipo de juego</th>
                         <th>Precio</th>
                         <th>Empresa desarrolladora</th>
-                        <th>Requisitos minimos</th>
+                        <th>Requisitos mínimos</th>
                         <th>Rating</th>
                         <th>Eliminar</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tablaJuegos">
+                  </tbody>
                 </table>
+                <hr>
+                
+                <form id="formAgregarJuego">
+                  <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                      <input class="input" type="text" id="nombre" placeholder="Nombre del juego" required>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Tipo de Juego</label>
+                    <div class="control">
+                      <input class="input" type="text" id="tipo" placeholder="Tipo de juego" required>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Precio</label>
+                    <div class="control">
+                      <input class="input" type="number" id="precio" placeholder="Precio del juego" min="0" required>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Empresa Desarrolladora</label>
+                    <div class="control">
+                      <input class="input" type="text" id="empresaDesarrolladora" placeholder="Empresa desarrolladora" value="SteamVerde&Co">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Requisitos Mínimos Gama</label>
+                    <div class="control">
+                      <input class="input" type="number" id="requisitos_minimosGama" placeholder="Requisitos mínimos de gama" min="0" max="3">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Rating</label>
+                    <div class="control">
+                      <input class="input" type="number" id="rating" placeholder="Rating del juego (0-10)" min="0" max="10">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Imagen</label>
+                    <div class="control">
+                      <input class="input" type="text" id="imagen" placeholder="Nombre del archivo de imagen" value="steamverde.png">
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button class="button is-primary" type="submit">Agregar Juego</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
+          
 
         <footer class="footer p-6" id="footer">
             <div class="content has-text-centered is-fluid">

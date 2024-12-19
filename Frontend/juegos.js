@@ -43,4 +43,61 @@ function eliminarJuego(id, boton) {
       }
     })
     .catch(error => console.error('Error al eliminar la juego:', error));
-  }
+}
+
+formAgregarJuego.addEventListener('submit', async function (event) {
+    event.preventDefault();
+  
+    const nombre = document.getElementById('nombre').value.trim();
+    const tipo = document.getElementById('tipo').value.trim();
+    const precio = parseInt(document.getElementById('precio').value, 10);
+    const empresaDesarrolladora = document.getElementById('empresaDesarrolladora').value.trim();
+    const requisitos_minimosGama = parseInt(document.getElementById('requisitos_minimosGama').value, 10) || null;
+    const rating = parseFloat(document.getElementById('rating').value) || null;
+    const imagen = document.getElementById('imagen').value.trim() || "steamverde.png";
+  
+    if (!nombre) {
+      alert('El campo "Nombre" es obligatorio.');
+      return;
+    }
+    if (precio < 0 || (requisitos_minimosGama !== null && requisitos_minimosGama < 0) || (rating !== null && (rating < 0 || rating > 10))) {
+      alert('Los valores numéricos no pueden ser negativos y el rating debe estar entre 0 y 10.');
+      return;
+    }
+  
+    const nuevoJuego = {
+      nombre,
+      tipo,
+      precio,
+      empresa_desarrolladora: empresaDesarrolladora || "SteamVerde&Co",
+      requisitos_minimosGama,
+      rating,
+      imagen,
+    };
+  
+    try {
+      const response = await fetch('http://localhost:3000/api/v1/juegos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nuevoJuego),
+      });
+  
+      if (response.status === 400) {
+        alert("El campo nombre no puede estar vacío.");
+      } else if (response.status === 409) {
+        alert("Ya existe un juego con ese nombre. Cambia el nombre.");
+      } else if (!response.ok) {
+        throw new Error("Error al agregar el juego.");
+      } else {
+        const juegoAgregado = await response.json();
+        
+        alert("Juego agregado exitosamente."); 
+        formAgregarJuego.reset(); 
+        location.reload();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Ocurrió un error inesperado. Revisa la consola.");
+    }
+  });
+  
