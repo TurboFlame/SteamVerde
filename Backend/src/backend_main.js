@@ -107,6 +107,24 @@ app.get('/api/v1/juegos/:id', async (req, res) =>{
     res.json(juego)
 })
 
+
+app.get('/api/v1/juego/:nombre', async (req, res) =>{
+    const juego = await prisma.juego.findFirst({
+        where: {
+            nombre:{
+                equals: req.params.nombre   
+            }   
+        }
+    })
+
+    if  (juego === null){
+        res.sendStatus(404)
+        return
+    }
+
+    res.json(juego)
+})
+
 app.get('/api/v1/desarrolladoras/:id', async (req, res) =>{
     const desarrolladora = await prisma.desarrolladora.findUnique({
         where: {
