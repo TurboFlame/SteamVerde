@@ -295,9 +295,9 @@ app.put('/api/v1/juegos/:id', async (req, res) =>{
         data: {
             nombre: req.body.nombre || juego.nombre,
             tipo: req.body.tipo || juego.tipo,
-            precio: parseInt(req.body.precio) || parseInt(juego.tipo),
+            precio: parseInt(req.body.precio) || parseInt(juego.precio),
             empresa_desarrolladora: req.body.empresa_desarrolladora || juego.empresa_desarrolladora,
-            requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama) || juego.empresa_desarrolladora,
+            requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama) || juego.requisitos_minimosGama,
             rating: parseFloat(req.body.rating) || parseFloat(juego.rating),
             imagen: req.body.imagen || juego.imagen
         }
