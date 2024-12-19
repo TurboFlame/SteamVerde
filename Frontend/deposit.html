@@ -28,7 +28,7 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="index.html">
                     Tienda
                 </a>
 
@@ -60,7 +60,7 @@
             </div>
 
             <div class="navbar-end">
-
+                <label class="label has-text-warning mt-1" id="label-dinero-depositar">$</label>
 
             </div>
         </div>
@@ -68,12 +68,12 @@
 </div>
 <div class="container is-centered has-background-success fit-screen" id="deposit-container">
     <form id="deposit-form">
-        <div class="field" id="input-num-tarjeta">
+        <div class="field" id="field-deposito">
             <label class="label mt-2" >Numero de tarjeta</label>
             <div class="control is-expanded mt-1 mb-1">
                 <input class="input has-text-centered"  type="text" placeholder="XXXX-XXXX-XXXX" required id="num-tarjeta" name="num-tarjeta"/>
             </div>
-            <div class="field is-grouped mt-1 mb-1">
+            <div class="field is-grouped mt-1 mb-1" >
                 <div class="control is-expanded">
                     <label class="label" >Fecha de vencimiento</label>
                     <input class="input has-text-centered" id="input-codigo" name="input-codigo" type="text" placeholder="MM/YY" required />
@@ -95,16 +95,13 @@
             </span>
                 </div>
             </div>
-            <button class="button is-link mb-4 has-bulma-primary-soft" type="submit" >Cargar dinero</button>
+            <button class="button is-link mb-4 has-bulma-primary-soft" type="submit" id="boton-depositar" >Cargar dinero</button>
         </div>
     </form>
 </div>
 </body>
-<script>
-    fetch('localhost:3000/api/v1')
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
-        });
+<script src="deposit.js">
+
 </script>
+
 </html>

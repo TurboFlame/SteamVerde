@@ -28,7 +28,7 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="index.html">
                     Tienda
                 </a>
             </div>
@@ -38,7 +38,7 @@
                     <div class="buttons">
 
 
-                        <a class="button is-light" href="login.html">
+                        <a class="button is-light" href="register.html">
                             Registrarse
                         </a>
                     </div>
@@ -63,7 +63,7 @@
         <div class="field">
             <label class="label">Nombre de usuario</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Ingrese su usuario">
+                <input class="input" type="text" id="usuario" placeholder="Ingrese su usuario">
                 <span class="icon is-small is-left">
       <i class="fas fa-user"></i>
     </span>
@@ -77,7 +77,7 @@
         <div class="field">
             <label class="label">Contraseña</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="email" placeholder="Ingrese su contraseña" >
+                <input class="input" type="email" id="contra" placeholder="Ingrese su contraseña" >
                 <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
@@ -90,19 +90,14 @@
 
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-link is-disabled" id="boton-ingreso" disabled>Ingresar</button>
+                <button class="button is-link" id="boton-ingreso" >Ingresar</button>
+            </div>
+            <div class="control">
+                <p class="help mt-2 is-hidden" id="mensaje-validacion-ingreso">ingreso invalido</p>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script>
-    fetch('localhost:3000/api/v1')
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
-        });
-
-
-</script>
+<script src="login.js"></script>
 </html>

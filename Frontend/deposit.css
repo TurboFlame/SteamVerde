@@ -1,17 +1,13 @@
 
 
-#input-num-tarjeta{
-    width: 80%;
+#field-deposito{
+    width: 95%;
 }
 #input-codigo{
-    width:87%
+    width: 95%;
 }
-#input-fecha{
-    width: 87%
-}
-#input-monto{
-    width:91%
-}
+
+
 .label {
     color: black !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  /* Bulma's default font */

@@ -27,7 +27,7 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="index.html">
                     Tienda
                 </a>
             </div>
@@ -55,7 +55,7 @@
         <div class="field">
             <label class="label">Nombre de usuario</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input is-success" type="text" placeholder="Ingrese su nombre de usuario" value="bulma">
+                <input class="input" type="text" id="nombre-usuario" placeholder="Ingrese su nombre de usuario" >
                 <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
         </span>
@@ -63,7 +63,7 @@
           <i class="fas fa-check"></i>
         </span>
             </div>
-            <p class="help is-success">This username is available</p>
+
         </div>
 
 
@@ -94,7 +94,7 @@
             <p class="help is-hidden" id="mensaje-validacion-contra"></p>
         </div>
         <div class="select mt-1 mb-3">
-            <select>
+            <select id="tipo-juego">
                 <option disabled selected value="">Tipo de juego favorito</option>
                 <option>Peleas</option>
                 <option>Disparos</option>
@@ -102,7 +102,17 @@
                 <option>Plataformas</option>
                 <option>Carreras</option>
                 <option>Terror</option>
+                <option>Aventura</option>
 
+            </select>
+        </div>
+        <div class="select mt-1 mb-3 ml-4">
+            <select id="tipo-consola">
+                <option disabled selected value="">Consola</option>
+                <option>PC</option>
+                <option>PS5</option>
+                <option>SWITCH</option>
+                <option>XBOX</option>
             </select>
         </div>
 
@@ -111,7 +121,7 @@
             <div class="control">
                 <label class="checkbox" >
                     <input type="checkbox" id="check-terminos">
-                    I agree to the <a href="#" id="boton-terminos">terms and conditions</a>
+                    Estoy de acuerdo con los <a href="#" id="boton-terminos">terminos y condiciones</a>
                 </label>
             </div>
         </div>
@@ -121,6 +131,7 @@
             <div class="control">
                 <button class="button is-link is-disabled" id="boton-registro" disabled>Registrarse</button>
             </div>
+            <p class="help is-hidden" id="mensaje-validacion-registro">registro invalido</p>
         </div>
 </div>
 </div>
@@ -132,16 +143,7 @@
         </header>
         <section class="modal-card-body">
             <div class="field">
-            By using this card, you agree to abide by these terms and any applicable laws.
-            The card is non-transferable and may only be used by the authorized holder.
-            The cardholder is responsible for keeping the card secure and reporting any loss or theft immediately.
-            The issuer reserves the right to modify or cancel the card, subject to notice.
-            Unauthorized transactions may result in the suspension of card privileges.
-            The card cannot be used for illegal activities or prohibited transactions.
-            Any disputes will be resolved in accordance with the issuer’s dispute resolution policy.
-            The cardholder agrees to provide accurate information and notify the issuer of any changes.
-            The cardholder is responsible for any fees associated with the card usage.
-            These terms are subject to change, and it is the cardholder’s responsibility to stay informed.
+            Al aceptar este acuerdo, está contractualmente obligado a aprobar al grupo SteamVerde
             </div>
         </section>
         <footer class="modal-card-foot">
@@ -155,11 +157,5 @@
 
 </body>
 <script src="register.js"></script>
-<script>
-    fetch('localhost:3000/api/v1')
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
-        });
-</script>
+
 </html>
