@@ -2,6 +2,7 @@ const grilla = document.getElementById("card-grid");
 
 const mostrarJuegos = async () => {
     try {
+
         const datos = await fetch('http://localhost:3000/api/v1/juegos');
         const juegos = await datos.json();
 
@@ -67,11 +68,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const registrarse=document.getElementById("registrarse");
     const ingreso=document.getElementById("ingreso");
     const dinero=document.getElementById("label-dinero");
+    const dev=document.getElementById("opciones-dev");
     if (usuario){
         perfil.classList.remove("is-hidden");
         registrarse.classList.add("is-hidden");
         ingreso.classList.add("is-hidden");
         dinero.textContent = "$" + usuario.dinero;
         dinero.classList.remove("is-hidden");
+    }
+    if (usuario.nombre=="Alvaro"){
+        dev.classList.remove("is-hidden");
     }
 });
