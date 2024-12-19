@@ -422,7 +422,6 @@ app.get('/api/v1/juego_desarrolladora/:id_desarrolladora', async (req, res) => {
                 id_desarrolladora: id_desarrolladora
             },
             include: {
-                desarrolladora: true,
                 juego: true
             }
         });
