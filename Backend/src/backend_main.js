@@ -178,7 +178,7 @@ app.post('/api/v1/juegos', async (req, res) =>{
             empresa_desarrolladora: req.body.empresa_desarrolladora,
             requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama),
             rating: parseFloat(req.body.rating),
-            imagen: req.body.params
+            imagen: req.body.imagen
         }
     })
 
