@@ -42,4 +42,4 @@ function eliminarUsuario(id, boton) {
       }
     })
     .catch(error => console.error('Error al eliminar el usuario:', error));
-  }
+}
