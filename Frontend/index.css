@@ -1,8 +1,19 @@
-/* Your CSS styles go here */
+html, body {
+    height: 100%; /* Ensure the viewport height is used */
+    margin: 0;
+}
 
+.site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the site container covers the full height of the viewport */
+}
+
+.site-main {
+    flex: 1; /* Pushes the footer to the bottom by taking up available space */
+}
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    background-color: #f5f5f5; /* Example color */
+    text-align: center; /* Center the footer content */
 }
