@@ -8,37 +8,42 @@ const mostrarJuegos = async () => {
         juegos.forEach((juego) => {
             const cardHTML = `
         <div class="column is-one-quarter"> 
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="${juego.imagen}" alt="${juego.nombre}" />
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img src="${juego.imagen}"  />
+          <div class="card" >
+              <a href="game.html?id=${encodeURIComponent(juego.id)}&nombre=${encodeURIComponent(juego.nombre)}&imagen=${encodeURIComponent(juego.imagen)}&rating=${encodeURIComponent(juego.rating)}&requisitos=${encodeURIComponent(juego.requisitos_minimosGama)}&precio=${encodeURIComponent(juego.precio)}&empresa_desarrolladora=${encodeURIComponent(juego.empresa_desarrolladora)}">
+
+
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="${juego.imagen}" alt="${juego.nombre}" />
                   </figure>
                 </div>
-                <div class="media-content">
-                  <p class="title is-4">${juego.nombre}</p>
-                  
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-48x48">
+                        <img src="${juego.imagen}"  />
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <p class="title is-4">${juego.nombre}</p>
+                      
+                    </div>
+                  </div>
+                  <div class="content">
+                    <label>★ Rating ${juego.rating}</label>
+                    <br />
+                    <label>${obtenerTextoRequisitos(juego.requisitos_minimosGama)}</label>
+                  </div>
                 </div>
-              </div>
-              <div class="content">
-                <label>★ Rating ${juego.rating}</label>
-                <br />
-                <label>${obtenerTextoRequisitos(juego.requisitos_minimosGama)}</label>
-              </div>
-            </div>
+                
+               </a> 
           </div>
         </div>
       `;
             grilla.insertAdjacentHTML("beforeend", cardHTML);
         });
     } catch (error) {
-        console.error("Error fetching cards:", error);
+        console.error("Error al obtener juegos:", error);
     }
 };
 
@@ -68,7 +73,5 @@ document.addEventListener("DOMContentLoaded", function() {
         ingreso.classList.add("is-hidden");
         dinero.textContent = "$" + usuario.dinero;
         dinero.classList.remove("is-hidden");
-
-
     }
 });

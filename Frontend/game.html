@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SteamVerde</title>
+    <link rel="stylesheet" href="game.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Team SteamVerde">
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    >
+    <script>
+        const parametrosURL=new URLSearchParams(window.location.search);
+        nombreProducto = parametrosURL.get("nombre");
+        imagenProducto = parametrosURL.get("imagen");
+        requisitosProducto = parametrosURL.get("requisitos");
+        ratingProducto = parametrosURL.get("rating");
+        precioProducto = parametrosURL.get("precio");
+        empresaProducto = parametrosURL.get("empresa_desarrolladora");
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("imagen-producto").src = imagenProducto;
+            document.getElementById("nombre-producto").innerHTML = nombreProducto;
+            document.getElementById("categoria-producto").innerHTML = `Rating: ${ratingProducto}`;
+            document.getElementById("precio-producto").innerHTML = `$ ${precioProducto}`;
+            document.getElementById("requisitos-producto").innerHTML = `Requisitos: ${obtenerTextoRequisitos(requisitosProducto)}`;
+            document.getElementById("empresa-producto").innerHTML = `Empresa: ${empresaProducto}`;
+        });
+        function obtenerTextoRequisitos(entero) {
+            if (entero == 0) {
+                return "Requisitos bajos";
+            } else if (entero == 1) {
+                return "Requisitos medios";
+            } else if (entero == 2) {
+                return "Requisitos altos";
+            } else {
+                return "Valor no válido";
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container is-widescreen">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                <img src="steamVerde.jpg" alt="SteamVerde Logo">
+            </a>
+            <a rolrolee="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="index.html">
+                    Tienda
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable is-hidden" id="perfil" >
+                    <a class="navbar-link">
+                        Perfil
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            Biblioteca
+                        </a>
+                        <a class="navbar-item is-selected" href="deposit.html">
+                            Ingresar dinero
+                        </a>
+                        <a class="navbar-item">
+                            Contact
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Report an issue
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="navbar-end"></div>
+            <div class="navbar-end">
+
+                <div class="navbar-item">
+                    <label class="label is-hidden has-text-warning mt-1 mb-4" id="label-dinero">Nombre de usuario</label>
+                    <div class="buttons">
+
+                        <a class="button is-primary" href="register.html" id="registrarse">
+                            <strong>Registrarse</strong>
+                        </a>
+                        <a class="button is-light" id="ingreso" href="login.html">
+                            Ingresar
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+    </nav>
+</div>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <!-- Product Image -->
+            <div class="column is-one-third">
+                <figure class="image">
+                    <img src="https://via.placeholder.com/300" id="imagen-producto">
+                </figure>
+            </div>
+
+            <div class="column is-two-thirds">
+                <h1 class="title is-2"id="nombre-producto"></h1>
+                <h2 class="subtitle is-4"id="categoria-producto">Categoria</h2>
+                <p class="is-size-5 has-text-weight-semibold" id="precio-producto">$199.99</p>
+
+
+                <div class="buttons">
+                    <button class="button is-primary is-large is-hidden">carrito</button>
+                    <button class="button is-link is-large">Comprar</button>
+                </div>
+
+                <div class="box">
+                    <h3 class="subtitle is-5">Especificaciones:</h3>
+                    <ul>
+                        <li><label class="label"id="requisitos-producto">Requisitos:</label></li>
+                        <li><label class="label" id="empresa-producto">Empresa</label></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>©Steam Verde</p>
+    </div>
+</footer>
+</body>
+
+<script>
+    fetch('localhost:3000/api/v1')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        });
+</script>
+</html>
