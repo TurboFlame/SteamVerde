@@ -178,7 +178,7 @@ app.post('/api/v1/juegos', async (req, res) =>{
             empresa_desarrolladora: req.body.empresa_desarrolladora,
             requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama),
             rating: parseFloat(req.body.rating),
-            imagen: req.body.params
+            imagen: req.body.imagen
         }
     })
 
@@ -413,13 +413,13 @@ app.delete('/api/v1/juegos/:id', async (req, res) =>{
     res.status(200).send(juego)
 })
 
-app.get('/api/v1/juego_desarrolladora/:id_juego', async (req, res) => {
-    const id_juego = parseInt(req.params.id_juego)
+app.get('/api/v1/juego_desarrolladora/:id_desarrolladora', async (req, res) => {
+    const id_desarrolladora = parseInt(req.params.id_desarrolladora)
 
     try {
         const juegoDesarrolladora = await prisma.juego_desarrolladora.findMany({
             where: {
-                id_juego: id_juego
+                id_desarrolladora: id_desarrolladora
             },
             include: {
                 desarrolladora: true,
@@ -437,7 +437,6 @@ app.get('/api/v1/juego_desarrolladora/:id_juego', async (req, res) => {
         console.error(error)
         res.status(500).json({ error: 'Error al obtener la información del juego y su desarrolladora.'})
     }
-
 })
 
 app.post('/api/v1/juego_desarrolladora/:id_desarrolladora/:id_juego', async (req, res) => {
