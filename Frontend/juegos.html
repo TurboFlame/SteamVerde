@@ -53,27 +53,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="navbar-item has-dropdown is-hoverable is-hidden" id="perfil" >
-                        <a class="navbar-item is-selected" href="desarrolladoras.html">
-                            Desarrolladoras
-                        </a>
-                        <a class="navbar-item is-selected" href="usuarios.html">
-                            Usuarios
-                        </a>
-                        <a class="navbar-item is-selected" href="juegos.html">
-                            Juegos
-                        </a>
-
-                    </div>
                 </div>
-                <div class="navbar-search">
-                    <div class="control has-icons-left has-icons-right is-expanded mt-1" >
-                        <input class="input has-text-centered" type="text" placeholder="Buscar juego" />
-                        <span class="icon is-static has-text-success is-left">
-                🔎
             </span>
                     </div>
-                </div>
+               
 
                 <div class="navbar-end"></div>
                 <div class="navbar-end">
@@ -98,30 +81,47 @@
         <section class="hero is-primary">
             <div class="hero-body">
                 <p class="title">Steam Verde</p>
-                <p class="subtitle">El Steam del pueblo</p>
+                <p class="subtitle">Usuarios</p>
             </div>
         </section>
     <section class="section">
-        <div class="container">
-
-            <h1 class="title">Juegos</h1>
-            <div id="card-grid" class="columns is-multiline"></div>
-
-        </div>
-
-    </section>
-
-    <footer class="footer p-6" id="footer">
-        <div class="content has-text-centered is-fluid">
-            <div class="columns container is-fluid">
-                <div class="column con">Desarrollado por Agus, Fran y Gilberto</div>
-                <div class="column" >SteamVerde© Co.</div>
-                <div class="column">Bottom text</div>
+        <div class='container has-text-centered'>
+            <div class='columns is-mobile is-centered'>
+              <div class='column is-8'>
+                <div>
+                  <h1 class='title'>Informacion Usuarios</h1>
+                  <hr>
+                </div>
+                <table class='table is-bordered has-background'>
+                  <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tipo de juego</th>
+                        <th>Precio</th>
+                        <th>Empresa desarrolladora</th>
+                        <th>Requisitos minimos</th>
+                        <th>Rating</th>
+                        <th>Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                </table>
+              </div>
             </div>
-        </div>
-    </footer>
+          </div>
+
+        <footer class="footer p-6" id="footer">
+            <div class="content has-text-centered is-fluid">
+                <div class="columns container is-fluid">
+                    <div class="column con">Desarrollado por Agus, Fran y Gilberto</div>
+                    <div class="column" >SteamVerde© Co.</div>
+                    <div class="column">Bottom text</div>
+                </div>
+            </div>
+        </footer>
     </body>
-    <script src="index.js"></script>
+    <script src="juegos.js"></script>
     <script>
         fetch('localhost:3000/api/v1')
         .then(response => response.json())
