@@ -1,6 +1,6 @@
 const grilla = document.getElementById("card-grid");
 
-const fetchCards = async () => {
+const mostrarJuegos = async () => {
     try {
         const datos = await fetch('http://localhost:3000/api/v1/juegos');
         const juegos = await datos.json();
@@ -42,7 +42,7 @@ const fetchCards = async () => {
     }
 };
 
-fetchCards();
+mostrarJuegos();
 
 function obtenerTextoRequisitos(entero) {
     if (entero === 0) {
