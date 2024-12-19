@@ -11,34 +11,8 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
     >
-    <script>
-        const parametrosURL=new URLSearchParams(window.location.search);
-        nombreProducto = parametrosURL.get("nombre");
-        imagenProducto = parametrosURL.get("imagen");
-        requisitosProducto = parametrosURL.get("requisitos");
-        ratingProducto = parametrosURL.get("rating");
-        precioProducto = parametrosURL.get("precio");
-        empresaProducto = parametrosURL.get("empresa_desarrolladora");
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("imagen-producto").src = imagenProducto;
-            document.getElementById("nombre-producto").innerHTML = nombreProducto;
-            document.getElementById("categoria-producto").innerHTML = `Rating: ${ratingProducto}`;
-            document.getElementById("precio-producto").innerHTML = `$ ${precioProducto}`;
-            document.getElementById("requisitos-producto").innerHTML = `Requisitos: ${obtenerTextoRequisitos(requisitosProducto)}`;
-            document.getElementById("empresa-producto").innerHTML = `Empresa: ${empresaProducto}`;
-        });
-        function obtenerTextoRequisitos(entero) {
-            if (entero == 0) {
-                return "Requisitos bajos";
-            } else if (entero == 1) {
-                return "Requisitos medios";
-            } else if (entero == 2) {
-                return "Requisitos altos";
-            } else {
-                return "Valor no válido";
-            }
-        }
-    </script>
+
+
 </head>
 <body>
 <div class="container is-widescreen">
@@ -121,11 +95,14 @@
                 <p class="is-size-5 has-text-weight-semibold" id="precio-producto">$199.99</p>
 
 
-                <div class="buttons">
-                    <button class="button is-primary is-large is-hidden">carrito</button>
-                    <button class="button is-link is-large">Comprar</button>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link is-large" id="boton-comprar">Comprar</button>
+                    </div>
+                    <div class="control">
+                        <p class="help has-text-danger is-hidden is-size-5" id="mensaje-validacion-compra">compra invalida</p>
+                    </div>
                 </div>
-
                 <div class="box">
                     <h3 class="subtitle is-5">Especificaciones:</h3>
                     <ul>
@@ -145,12 +122,82 @@
     </div>
 </footer>
 </body>
-
 <script>
-    fetch('localhost:3000/api/v1')
-        .then(response => response.json())
-        .then(json => {
-            console.log(json);
-        });
+
+    const parametrosURL=new URLSearchParams(window.location.search);
+    nombreProducto = parametrosURL.get("nombre");
+    imagenProducto = parametrosURL.get("imagen");
+    requisitosProducto = parametrosURL.get("requisitos");
+    ratingProducto = parametrosURL.get("rating");
+    precioProducto = parametrosURL.get("precio");
+    empresaProducto = parametrosURL.get("empresa_desarrolladora");
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("imagen-producto").src = imagenProducto;
+        document.getElementById("nombre-producto").innerHTML = nombreProducto;
+        document.getElementById("categoria-producto").innerHTML = `Rating: ${ratingProducto}`;
+        document.getElementById("precio-producto").innerHTML = `$ ${precioProducto}`;
+        document.getElementById("requisitos-producto").innerHTML = `Requisitos: ${obtenerTextoRequisitos(requisitosProducto)}`;
+        document.getElementById("empresa-producto").innerHTML = `Empresa: ${empresaProducto}`;
+    });
+    function obtenerTextoRequisitos(entero) {
+        if (entero == 0) {
+            return "Requisitos bajos";
+        } else if (entero == 1) {
+            return "Requisitos medios";
+        } else if (entero == 2) {
+            return "Requisitos altos";
+        } else {
+            return "Valor no válido";
+        }
+    }
+    const msgValidacionCompra=document.getElementById("mensaje-validacion-compra");
+    const botonComprar=document.getElementById("boton-comprar");
+    botonComprar.addEventListener("click", function(){
+        event.preventDefault()
+        const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+        if (usuario.dinero-parseFloat(precioProducto) >=0){
+            usuario.dinero-=parseFloat(precioProducto);
+        }
+        depositar(usuario.dinero,usuario.id)
+        location.reload()
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
+    })
+    async function depositar(dineroNuevo,idUsuario){
+
+        const respuesta = fetch(`http://localhost:3000/api/v1/usuarios/${idUsuario}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dinero: dineroNuevo,
+            }),
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Monto depositado con exito")
+                }else if (response.status === 404){
+                    console.log(response)
+                }else {
+                }
+            })
+
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+        const perfil = document.getElementById("perfil");
+        const registrarse=document.getElementById("registrarse");
+        const ingreso=document.getElementById("ingreso");
+        const dinero=document.getElementById("label-dinero");
+        if (usuario){
+            perfil.classList.remove("is-hidden");
+            registrarse.classList.add("is-hidden");
+            ingreso.classList.add("is-hidden");
+            dinero.textContent = "$" + usuario.dinero;
+            dinero.classList.remove("is-hidden");
+        }
+    });
 </script>
+
+
 </html>
