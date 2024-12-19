@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SteamVerde</title>
+        <link rel="stylesheet" href="index.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Team SteamVerde">
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        >
+    </head>
+    <body>
+    <div class="container is-widescreen">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <img src="steamVerde.jpg" alt="SteamVerde Logo">
+                </a>
+                <a rolrolee="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="index.html">
+                        Tienda
+                    </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable is-hidden" id="perfil" >
+                        <a class="navbar-link">
+                            Perfil
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Biblioteca
+                            </a>
+                            <a class="navbar-item is-selected" href="deposit.html">
+                                Ingresar dinero
+                            </a>
+                            <a class="navbar-item">
+                                Contact
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Report an issue
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </span>
+                    </div>
+               
+
+                <div class="navbar-end"></div>
+                <div class="navbar-end">
+
+                    <div class="navbar-item">
+                        <label class="label is-hidden has-text-warning mt-1" id="label-dinero">Nombre de usuario</label>
+                        <div class="buttons">
+
+                            <a class="button is-primary" href="register.html" id="registrarse">
+                                <strong>Registrarse</strong>
+                            </a>
+                            <a class="button is-light" id="ingreso" href="login.html">
+                                Ingresar
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <p class="title">Steam Verde</p>
+                <p class="subtitle">Usuarios</p>
+            </div>
+        </section>
+    <section class="section">
+        <div class='container has-text-centered'>
+            <div class='columns is-mobile is-centered'>
+              <div class='column is-8'>
+                <div>
+                  <h1 class='title'>Información de Usuarios</h1>
+                  <hr>
+                </div>
+                <table class='table is-bordered has-background'>
+                  <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tipo de juego</th>
+                        <th>Precio</th>
+                        <th>Empresa desarrolladora</th>
+                        <th>Requisitos mínimos</th>
+                        <th>Rating</th>
+                        <th>Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablaJuegos">
+                  </tbody>
+                </table>
+                <hr>
+                
+                <form id="formAgregarJuego">
+                  <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                      <input class="input" type="text" id="nombre" placeholder="Nombre del juego" required>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Tipo de Juego</label>
+                    <div class="control">
+                      <input class="input" type="text" id="tipo" placeholder="Tipo de juego" required>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Precio</label>
+                    <div class="control">
+                      <input class="input" type="number" id="precio" placeholder="Precio del juego" min="0" required>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Empresa Desarrolladora</label>
+                    <div class="control">
+                      <input class="input" type="text" id="empresaDesarrolladora" placeholder="Empresa desarrolladora" value="SteamVerde&Co">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Requisitos Mínimos Gama</label>
+                    <div class="control">
+                      <input class="input" type="number" id="requisitos_minimosGama" placeholder="Requisitos mínimos de gama" min="0" max="3">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Rating</label>
+                    <div class="control">
+                      <input class="input" type="number" id="rating" placeholder="Rating del juego (0-10)" min="0" max="10">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Imagen</label>
+                    <div class="control">
+                      <input class="input" type="text" id="imagen" placeholder="Nombre del archivo de imagen" value="steamverde.png">
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button class="button is-primary" type="submit">Agregar Juego</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+
+        <footer class="footer p-6" id="footer">
+            <div class="content has-text-centered is-fluid">
+                <div class="columns container is-fluid">
+                    <div class="column con">Desarrollado por Agus, Fran y Gilberto</div>
+                    <div class="column" >SteamVerde© Co.</div>
+                    <div class="column">Bottom text</div>
+                </div>
+            </div>
+        </footer>
+    </body>
+    <script src="juegos.js"></script>
+    <script>
+        fetch('localhost:3000/api/v1')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        });
+    </script>
+</html>
