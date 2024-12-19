@@ -472,4 +472,30 @@ app.post('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
   })
 
 
+  app.delete('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
 
+    const juego_existe = await prisma.juegos_comprados.findFirst({
+        where: {
+            id_juego: parseInt(req.params.id_juego),
+            id_usuario: parseInt(req.params.id_usuario),
+
+        }
+        })
+    
+    if (juego_existe == null) {
+        res.sendStatus(404)
+        return 
+    }
+
+    try {
+      const juego_comprado = await prisma.juegos_comprados.delete({
+        where:  {
+          id: juego_existe.id   },
+    })
+      res.status(200).send(juego_comprado)
+    } 
+    catch (error) {
+      console.error(error)
+      res.status(500).json({ error: 'Error al eliminar el juego comprado' })
+    }
+  })   
