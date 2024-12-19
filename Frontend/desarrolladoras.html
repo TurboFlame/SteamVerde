@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SteamVerde</title>
+        <link rel="stylesheet" href="index.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Team SteamVerde">
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        >
+    </head>
+    <body>
+    <div class="container is-widescreen">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <img src="steamVerde.jpg" alt="SteamVerde Logo">
+                </a>
+                <a rolrolee="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="index.html">
+                        Tienda
+                    </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable is-hidden" id="perfil" >
+                        <a class="navbar-link">
+                            Perfil
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Biblioteca
+                            </a>
+                            <a class="navbar-item is-selected" href="deposit.html">
+                                Ingresar dinero
+                            </a>
+                            <a class="navbar-item">
+                                Contact
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Report an issue
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </span>
+                    </div>
+               
+
+                <div class="navbar-end"></div>
+                <div class="navbar-end">
+
+                    <div class="navbar-item">
+                        <label class="label is-hidden has-text-warning mt-1" id="label-dinero">Nombre de usuario</label>
+                        <div class="buttons">
+
+                            <a class="button is-primary" href="register.html" id="registrarse">
+                                <strong>Registrarse</strong>
+                            </a>
+                            <a class="button is-light" id="ingreso" href="login.html">
+                                Ingresar
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <p class="title">Steam Verde</p>
+                <p class="subtitle">desarrolladoras</p>
+            </div>
+        </section>
+    <section class="section">
+        <div class='container has-text-centered'>
+            <div class='columns is-mobile is-centered'>
+              <div class='column is-8'>
+                <div>
+                  <h1 class='title'>Informacion Desarrolladoras</h1>
+                  <hr>
+                </div>
+                <table class='table is-bordered has-background'>
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Cantidad de juegos publicados</th>
+                      <th>Ubicacion</th>
+                      <th>Ultimo juego publicado</th>
+                      <th>Rating</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        <footer class="footer p-6" id="footer">
+            <div class="content has-text-centered is-fluid">
+                <div class="columns container is-fluid">
+                    <div class="column con">Desarrollado por Agus, Fran y Gilberto</div>
+                    <div class="column" >SteamVerde© Co.</div>
+                    <div class="column">Bottom text</div>
+                </div>
+            </div>
+        </footer>
+    </body>
+    <script src="desarrolladoras.js"></script>
+    <script>
+        fetch('localhost:3000/api/v1')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+        });
+    </script>
+</html>
