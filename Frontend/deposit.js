@@ -9,9 +9,14 @@ botonDepositar.addEventListener("click", function(){
     event.preventDefault()
 
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-    usuario.dinero+=parseInt(inputMonto.value);
-    depositar(usuario.dinero,usuario.id)
-    sessionStorage.setItem('usuario', JSON.stringify(usuario));
+    if (inputMonto.value>0){
+        usuario.dinero+=parseInt(inputMonto.value);
+        depositar(usuario.dinero,usuario.id)
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
+    }else{
+        mensajeDepositoValidacionInvalido("Monto Invalido")
+    }
+
 })
 document.addEventListener("DOMContentLoaded", function() {
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
