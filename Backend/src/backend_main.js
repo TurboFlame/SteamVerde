@@ -413,7 +413,6 @@ app.delete('/api/v1/juegos/:id', async (req, res) =>{
     res.status(200).send(juego)
 })
 
-
 app.get('/api/v1/juegos_comprados/:id_usuario', async (req, res) => {
   const  id_usuario  = req.params.id_usuario
 
@@ -472,30 +471,84 @@ app.post('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
   })
 
 
-  app.delete('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
+app.delete('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
+  const juego_existe = await prisma.juegos_comprados.findFirst({
+      where: {
+          id_juego: parseInt(req.params.id_juego),
+          id_usuario: parseInt(req.params.id_usuario),
+      }
+      })
+  
+  if (juego_existe == null) {
+      res.sendStatus(404)
+      return 
+  }
+  try {
+    const juego_comprado = await prisma.juegos_comprados.delete({
+      where:  {
+        id: juego_existe.id   },
+  })
+    res.status(200).send(juego_comprado)
+  } 
+  catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Error al eliminar el juego comprado' })
+  }
+})   
 
-    const juego_existe = await prisma.juegos_comprados.findFirst({
-        where: {
-            id_juego: parseInt(req.params.id_juego),
-            id_usuario: parseInt(req.params.id_usuario),
+app.get('/api/v1/juego_desarrolladora/:id_desarrolladora', async (req, res) => {
+    const id_desarrolladora = parseInt(req.params.id_desarrolladora)
 
+    try {
+        const juegoDesarrolladora = await prisma.juego_desarrolladora.findMany({
+            where: {
+                id_desarrolladora: id_desarrolladora
+            },
+            include: {
+                juego: true
+            }
+        });
+
+        if (!juegoDesarrolladora || juegoDesarrolladora.length === 0) {
+            res.status(404).json({ error: 'No se encontró información para el juego especificado.'})
+            return
         }
+
+        res.send(juegoDesarrolladora)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Error al obtener la información del juego y su desarrolladora.')
+    }
+})
+
+app.post('/api/v1/juego_desarrolladora/:id_desarrolladora/:id_juego', async (req, res) => {
+    const id_juego = parseInt(req.params.id_juego)
+    const id_desarrolladora = parseInt(req.params.id_desarrolladora)
+
+    const juego_existe = await prisma.juego_desarrolladora.findFirst({
+        where: {
+            id_desarrolladora: id_desarrolladora,
+            id_juego: id_juego
+        },
         })
-    
-    if (juego_existe == null) {
-        res.sendStatus(404)
+
+    if (juego_existe != null) {
+        res.status(409).send('El juego ya tiene desarrolladora')
         return 
     }
 
     try {
-      const juego_comprado = await prisma.juegos_comprados.delete({
-        where:  {
-          id: juego_existe.id   },
-    })
-      res.status(200).send(juego_comprado)
+      const juego_desarrolladora = await prisma.juego_desarrolladora.create({
+        data: {
+          id_juego: id_juego,
+          id_desarrolladora: id_desarrolladora
+        }
+      })
+
+      res.status(201).send(juego_desarrolladora)
     } 
     catch (error) {
       console.error(error)
-      res.status(500).json({ error: 'Error al eliminar el juego comprado' })
+      res.status(500).send('Error al asignar desarrolladora')
     }
-  })   
+})
