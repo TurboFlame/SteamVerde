@@ -1,4 +1,4 @@
-import {response} from "express";
+
 
 const inputMonto= document.getElementById("input-monto");
 const botonDepositar= document.getElementById("boton-depositar");
@@ -8,7 +8,8 @@ const botonDepositar= document.getElementById("boton-depositar");
 botonDepositar.addEventListener("click", function(){
 
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-    usuario.dinero+=inputMonto.value;
+    usuario.dinero+=parseInt(inputMonto.value);
+    depositar(usuario.dinero,usuario.id)
     sessionStorage.setItem('usuario', JSON.stringify(usuario));
 })
 document.addEventListener("DOMContentLoaded", function() {
@@ -19,9 +20,11 @@ document.addEventListener("DOMContentLoaded", function() {
         dinero.textContent = "$" + usuario.dinero;
     }
 
+
 });
-async function depositar(nuevoDinero){
-    fetch(`/api/v1/usuarios/${usuarioId}`, {
+async function depositar(dineroNuevo,idUsuario){
+
+    fetch(`http://localhost:3000/api/v1/usuarios/${idUsuario}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -35,12 +38,8 @@ async function depositar(nuevoDinero){
                 console.log("Monto depositado con exito")
             }
         })
-        .then(updatedUsuario => {
-            console.log('Usuario updated:', updatedUsuario);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+
+
 
 
 
