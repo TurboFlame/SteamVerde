@@ -178,7 +178,7 @@ app.post('/api/v1/juegos', async (req, res) =>{
             empresa_desarrolladora: req.body.empresa_desarrolladora,
             requisitos_minimosGama: parseInt(req.body.requisitos_minimosGama),
             rating: parseFloat(req.body.rating),
-            imagen: req.body.params
+            imagen: req.body.imagen
         }
     })
 
@@ -412,3 +412,90 @@ app.delete('/api/v1/juegos/:id', async (req, res) =>{
     
     res.status(200).send(juego)
 })
+
+
+app.get('/api/v1/juegos_comprados/:id_usuario', async (req, res) => {
+  const  id_usuario  = req.params.id_usuario
+
+  try {
+    const juegos_comprados = await prisma.juegos_comprados.findMany({
+      where: {
+        id_usuario: parseInt(id_usuario), 
+      },
+      include: {
+        juego: true,
+      },
+    })
+
+    if(juegos_comprados == null){
+        res.sendStatus(404)
+        return
+    }
+    res.json(juegos_comprados)
+  } 
+  catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Error al obtener los juegos comprados' })
+  }
+})
+
+
+app.post('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
+
+    const juego_existe = await prisma.juegos_comprados.findFirst({
+        where: {
+            id_juego: parseInt(req.params.id_juego),
+            id_usuario: parseInt(req.params.id_usuario),
+
+        }
+        })
+    
+    if (juego_existe != null) {
+        res.status(409).send('El juego ya fue comprado')
+        return 
+    }
+
+    try {
+      const juego_comprado = await prisma.juegos_comprados.create({
+        data: {
+          id_usuario: parseInt(req.params.id_usuario),
+          id_juego: parseInt(req.params.id_juego),
+        },
+      })
+      
+      res.status(201).json(juego_comprado)
+    } 
+    catch (error) {
+      console.error(error)
+      res.status(500).json({ error: 'Error al comprar el juego' })
+    }
+  })
+
+
+  app.delete('/api/v1/juegos_comprados/:id_juego/:id_usuario', async (req, res) => {
+
+    const juego_existe = await prisma.juegos_comprados.findFirst({
+        where: {
+            id_juego: parseInt(req.params.id_juego),
+            id_usuario: parseInt(req.params.id_usuario),
+
+        }
+        })
+    
+    if (juego_existe == null) {
+        res.sendStatus(404)
+        return 
+    }
+
+    try {
+      const juego_comprado = await prisma.juegos_comprados.delete({
+        where:  {
+          id: juego_existe.id   },
+    })
+      res.status(200).send(juego_comprado)
+    } 
+    catch (error) {
+      console.error(error)
+      res.status(500).json({ error: 'Error al eliminar el juego comprado' })
+    }
+  })   
