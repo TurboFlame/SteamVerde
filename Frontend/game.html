@@ -41,7 +41,7 @@
                     </a>
 
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">
+                        <a class="navbar-item" href="library.html">
                             Biblioteca
                         </a>
                         <a class="navbar-item is-selected" href="deposit.html">
@@ -53,7 +53,7 @@
                         <hr class="navbar-divider">
                         <a class="navbar-item">
                             Report an issue
-                        </a>/api/v1/juegos
+                        </a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,6 @@
 <section class="section">
     <div class="container">
         <div class="columns">
-            <!-- Product Image -->
             <div class="column is-one-third">
                 <figure class="image">
                     <img src="https://via.placeholder.com/300" id="imagen-producto">
@@ -107,7 +106,7 @@
                     <h3 class="subtitle is-5">Especificaciones:</h3>
                     <ul>
                         <li><label class="label"id="requisitos-producto">Requisitos:</label></li>
-                        <li><label class="label"/api/v1/juegos id="empresa-producto">Empresa</label></li>
+                        <li><label class="label" id="empresa-producto">Empresa</label></li>
 
                     </ul>
                 </div>
@@ -158,8 +157,8 @@
     botonComprar.addEventListener("click", function(){
         event.preventDefault()
         const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-        if (usuario.dinero-parseFloat(precioProducto) >=0 && agregar_juego_usuario(usuario.id,idProducto).ok){
-            usuario.dinero-=parseFloat(precioProducto);
+        if ((usuario.dinero) - (parseFloat(precioProducto)) >=0 && agregar_juego_usuario(usuario.id,idProducto).ok){
+            usuario.dinero-=precioProducto;
         }
         depositar(usuario.dinero,usuario.id)
 
@@ -178,7 +177,7 @@
             })
         });
         if (respuesta.status == 409) {
-            botonComprar.textContent="Juego Comprado"
+            botonComprar.textContent="Juego ya Comprado"
         }
         if (respuesta.status == 201) {
             console.log("Juego comprado exitosamente");

@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const registrarse=document.getElementById("registrarse");
     const ingreso=document.getElementById("ingreso");
     const dinero=document.getElementById("label-dinero");
-    const dev=document.getElementById("opciones-dev");
+    const dev=document.getElementById("index-dev");
     if (usuario){
         perfil.classList.remove("is-hidden");
         registrarse.classList.add("is-hidden");
