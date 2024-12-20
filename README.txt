@@ -6,6 +6,9 @@ requisitos:
 -npm
 
 Descargar dependencias para arrancar el backend por primera vex (solo la primera vez)
+```
+hola
+```
 -npm install @prisma/client
 -npm install express 
 -npm install nodemon
